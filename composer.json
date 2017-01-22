@@ -1,0 +1,23 @@
+{
+  "name": "demeyerthom/pe-online-client",
+  "description": "PHP client for interacting with the PE-online/GAIA webservice",
+  "authors": [
+    {
+      "name": "demeyerthom",
+      "email": "demeyerthom@hotmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6",
+    "guzzle/guzzle": "^3.9",
+    "illuminate/support": "^5.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Demeyerthom\\PeOnline\\": "src/"
+    }
+  }
+}

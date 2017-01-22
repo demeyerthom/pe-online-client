@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="yes"?>
+<Entry>
+    <Settings>
+        <userID>[wordt u aangeleverd]</userID>
+        <userRole>EDU</userRole>
+        <userKey>[wordt u aangeleverd]</userKey>
+        <orgID>19</orgID>
+        <settingOutput>1</settingOutput>
+        <emailOutput>s.peek@xaurum.nl</emailOutput>
+        <languageID>1</languageID>
+        <defaultLanguageID>1</defaultLanguageID>
+    </Settings>
+    <Attendance>
+        <PECourseID>9471</PECourseID>
+        <externalPersonID>39054148101</externalPersonID>
+        <externalmoduleID>Module_A</externalmoduleID>
+        <endDate>2008-06-09T13:08:13.9422087+02:00</endDate>
+    </Attendance>
+    <Attendance>
+        <PECourseID>8001</PECourseID>
+        <externalPersonID>39054148101</externalPersonID>
+        <endDate>2008-06-08T13:08:13.9422087+02:00</endDate>
+    </Attendance>
+    <Attendance>
+        <PECourseID>8001</PECourseID>
+        <externalPersonID>59059671101</externalPersonID>
+        <endDate>2008-06-08T13:08:13.9422087+02:00</endDate>
+    </Attendance>
+</Entry>

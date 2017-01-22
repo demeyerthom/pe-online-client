@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="yes"?>
+<Summary>
+    <Results>
+        <rejected_rows>1</rejected_rows>
+        <accepted_rows>2</accepted_rows>
+        <total_rows>3</total_rows>
+    </Results>
+    <Error>
+        <errorNR>100</errorNR>
+        <errorMsg>Cursus 9471 op regel 2 is niet (juist) geaccrediteerd; Datum 09-06-2008 valt buiten alle accr.
+            periodes
+        </errorMsg>
+    </Error>
+    <Accepted>
+        <person>59059671101</person>
+        <course>8001</course>
+        <date>2008-06-08T13:08:13.9422087+02:00</date>
+    </Accepted>
+    <Accepted>
+        <person>39054148101</person>
+        <course>8001</course>
+        <date>2008-06-08T13:08:13.9422087+02:00</date>
+    </Accepted>
+</Summary>
