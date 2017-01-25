@@ -36,7 +36,7 @@ class Parser
 
         foreach ($attendances as $attendance) {
             $attendanceElement = $xml->createElement('Attendance');
-            foreach ($attendance as $key => $value) {
+            foreach ($attendance->toArray() as $key => $value) {
                 $element = $xml->createElement($key, $value);
                 $attendanceElement->appendChild($element);
             }
@@ -53,25 +53,27 @@ class Parser
         $summary = ModelFactory::create(Summary::class);
 
         $results = ModelFactory::create(Results::class);
-        if (isset($summary->Results)) {
-            foreach ($summary->Results as $name => $value) {
+        if (isset($response->Results)) {
+            foreach ($response->Results as $name => $value) {
                 $results->$name = $value;
             }
         }
         $summary->results = $results;
 
         foreach ($response->Error as $errorElement) {
-            $error = ModelFactory::create(Error::class);
-            $error->errorMsg = (string)$errorElement->errorMsg;
-            $error->errorNR = (string)$errorElement->errorNr;
+            $error = ModelFactory::create(Error::class, [
+                'errorMsg' => (string)$errorElement->errorMsg,
+                'errorNR' => (string)$errorElement->errorNr
+            ]);
             $summary->errors[] = $error;
         }
 
         foreach ($response->Accepted as $acceptedElement) {
-            $accepted = ModelFactory::create(Accepted::class);
-            $accepted->course = (string)$acceptedElement->course;
-            $accepted->date = (string)$acceptedElement->date;
-            $accepted->person = (string)$acceptedElement->person;
+            $accepted = ModelFactory::create(Accepted::class, [
+                'course' => (string)$acceptedElement->course,
+                'date' => (string)$acceptedElement->date,
+                'person' => (string)$acceptedElement->person
+            ]);
             $summary->accepted[] = $accepted;
         }
 

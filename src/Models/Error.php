@@ -9,7 +9,7 @@
 namespace Demeyerthom\PeOnline\Models;
 
 
-class Error extends AbstractModel
+class Error extends Model
 {
     protected $attributes = [
         'errorNR' => null,

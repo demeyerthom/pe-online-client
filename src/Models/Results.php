@@ -9,7 +9,7 @@
 namespace Demeyerthom\PeOnline\Models;
 
 
-class Results extends AbstractModel
+class Results extends Model
 {
     protected $attributes = [
         'rejected_rows' => 0,

@@ -9,7 +9,7 @@
 namespace Demeyerthom\PeOnline\Models;
 
 
-class Accepted extends AbstractModel
+class Accepted extends Model
 {
     protected $attributes = [
         'person' => null,

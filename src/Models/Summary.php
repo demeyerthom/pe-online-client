@@ -11,36 +11,24 @@ namespace Demeyerthom\PeOnline\Models;
 
 use Illuminate\Support\Collection;
 
-class Summary
+class Summary extends Model
 {
     /**
      * @var Results
      */
-    public $results;
-    /**
-     * @var Collection
-     */
-    public $errors;
-    /**
-     * @var Collection
-     */
-    public $accepted;
-
-    /**
-     * @var Collection
-     */
-    public $attendances;
-
-    /**
-     * @var array
-     */
-    public $settings;
+    protected $attributes = [
+        'results' => null,
+        'errors' => null,
+        'accepted' => null,
+        'attendances' => null,
+        'settings' => null
+    ];
 
     public function __construct()
     {
-        $this->accepted = new Collection();
-        $this->errors = new Collection();
-        $this->attendances = new Collection();
+        $this->attributes['accepted'] = new Collection();
+        $this->attributes['errors'] = new Collection();
+        $this->attributes['attendances'] = new Collection();
     }
 
 

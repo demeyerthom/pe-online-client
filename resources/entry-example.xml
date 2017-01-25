@@ -1,12 +1,12 @@
 <?xml version="1.0" standalone="yes"?>
 <Entry>
     <Settings>
-        <userID>[wordt u aangeleverd]</userID>
+        <userID>1</userID>
         <userRole>EDU</userRole>
-        <userKey>[wordt u aangeleverd]</userKey>
+        <userKey>secret</userKey>
         <orgID>19</orgID>
         <settingOutput>1</settingOutput>
-        <emailOutput>s.peek@xaurum.nl</emailOutput>
+        <emailOutput>test@test.nl</emailOutput>
         <languageID>1</languageID>
         <defaultLanguageID>1</defaultLanguageID>
     </Settings>

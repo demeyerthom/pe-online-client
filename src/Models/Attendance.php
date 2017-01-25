@@ -8,6 +8,8 @@
 
 namespace Demeyerthom\PeOnline\Models;
 
+use Demeyerthom\PeOnline\Exceptions\WrongInputException;
+
 
 /**
  * Een cursus is in PE-online van een bepaald type:
@@ -22,7 +24,7 @@ namespace Demeyerthom\PeOnline\Models;
  * Class Attendance
  * @package Demeyerthom\PeOnline\Models
  */
-class Attendance extends AbstractModel
+class Attendance extends Model
 {
     protected $attributes = [
         'PECourseID' => null,
@@ -37,10 +39,9 @@ class Attendance extends AbstractModel
         'externalMeetingID' => null,
     ];
 
-    public function validate()
-    {
-        print_r('validate');
-    }
+    protected $datetime = [
+        'endDate'
+    ];
 
 
 }
