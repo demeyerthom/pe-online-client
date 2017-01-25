@@ -17,11 +17,19 @@ class Model
 
     protected $datetime = [];
 
+    public function __construct($variables = [])
+    {
+        foreach ($variables as $key => $variable) {
+            $this->$key = $variable;
+        }
+    }
+
     public function __get($name)
     {
         $method_name = "get$name";
 
         if (!key_exists($name, $this->attributes)) {
+
             throw new NotClassPropertyException("$name is not a property of " . get_class($this));
         }
 

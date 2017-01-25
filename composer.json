@@ -19,5 +19,8 @@
     "psr-4": {
       "Demeyerthom\\PeOnline\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": { "Demeyerthom\\PeOnline\\Tests\\": "tests/" }
   }
 }

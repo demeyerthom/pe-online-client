@@ -9,14 +9,25 @@
 namespace Demeyerthom\PeOnline;
 
 
+use Illuminate\Support\Collection;
+
 class ModelFactory
 {
-    public static function create($class, array $variables = [])
+    public function create($class, array $fields = [])
     {
         $model = new $class;
-        foreach ($variables as $key => $variable) {
-            $model->$key = $variable;
+        foreach ($fields as $key => $field) {
+            $model->$key = $field;
         }
         return $model;
+    }
+
+    public function createMultiple($class, $instances): Collection
+    {
+        $collection = new Collection();
+        foreach ($instances as $fields) {
+            $collection->push($this->create($class, $fields));
+        }
+        return $collection;
     }
 }

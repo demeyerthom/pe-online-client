@@ -17,6 +17,13 @@ use Illuminate\Support\Collection;
 
 class Parser
 {
+    protected $factory;
+
+    public function __construct(ModelFactory $factory = null)
+    {
+        $this->factory = (!empty($factory)) ? $factory : new ModelFactory();
+    }
+
     /**
      * @param array $settings
      * @param Collection $attendances
@@ -50,18 +57,13 @@ class Parser
     public function parseSummary(string $summaryString): Summary
     {
         $response = simplexml_load_string($summaryString);
-        $summary = ModelFactory::create(Summary::class);
+        $summary = $this->factory->create(Summary::class);
 
-        $results = ModelFactory::create(Results::class);
-        if (isset($response->Results)) {
-            foreach ($response->Results as $name => $value) {
-                $results->$name = $value;
-            }
-        }
+        $results = $this->factory->create(Results::class, (array) $response->Results);
         $summary->results = $results;
 
         foreach ($response->Error as $errorElement) {
-            $error = ModelFactory::create(Error::class, [
+            $error = $this->factory->create(Error::class, [
                 'errorMsg' => (string)$errorElement->errorMsg,
                 'errorNR' => (string)$errorElement->errorNr
             ]);
@@ -69,7 +71,7 @@ class Parser
         }
 
         foreach ($response->Accepted as $acceptedElement) {
-            $accepted = ModelFactory::create(Accepted::class, [
+            $accepted = $this->factory->create(Accepted::class, [
                 'course' => (string)$acceptedElement->course,
                 'date' => (string)$acceptedElement->date,
                 'person' => (string)$acceptedElement->person
