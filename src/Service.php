@@ -12,7 +12,6 @@ namespace Demeyerthom\PeOnline;
 use Demeyerthom\PeOnline\Exceptions\AttendanceBatchTooLargeException;
 use Demeyerthom\PeOnline\Interfaces\ClientInterface;
 use Demeyerthom\PeOnline\Interfaces\ParserInterface;
-use Demeyerthom\PeOnline\Models\Attendance;
 use Demeyerthom\PeOnline\Models\Summary;
 use Illuminate\Support\Collection;
 
