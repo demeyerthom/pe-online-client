@@ -10,19 +10,38 @@ namespace Demeyerthom\PeOnline;
 
 
 use Demeyerthom\PeOnline\Exceptions\AttendanceBatchTooLargeException;
+use Demeyerthom\PeOnline\Interfaces\ClientInterface;
+use Demeyerthom\PeOnline\Interfaces\ParserInterface;
 use Demeyerthom\PeOnline\Models\Attendance;
 use Demeyerthom\PeOnline\Models\Summary;
-use Guzzle\Http\ClientInterface;
 use Illuminate\Support\Collection;
 
 class Service
 {
+    /**
+     * @var array
+     */
     protected $settings;
+    /**
+     * @var Client|ClientInterface|null
+     */
     protected $client;
+    /**
+     * @var ParserInterface|Parser|null
+     */
     protected $parser;
+    /**
+     * @var
+     */
     protected $factory;
 
-    public function __construct(array $settings, ClientInterface $client = null, Parser $parser = null)
+    /**
+     * Service constructor.
+     * @param array $settings
+     * @param ClientInterface|null $client
+     * @param ParserInterface|null $parser
+     */
+    public function __construct(array $settings, ClientInterface $client = null, ParserInterface $parser = null)
     {
         $this->client = (!empty($client)) ? $client : new Client();
         $this->parser = (!empty($parser)) ? $parser : new Parser();
@@ -30,7 +49,7 @@ class Service
     }
 
     /**
-     * @param Attendance[] $attendances
+     * @param array $attendances
      * @return Summary
      * @throws AttendanceBatchTooLargeException
      */
@@ -44,7 +63,7 @@ class Service
         }
         $xml = $this->parser->createRequestString($this->settings, $attendances);
         $response = $this->client->postAttendance($xml);
-        $summary = $this->parser->parseSummary($response->getBody());
+        $summary = $this->parser->parseSummary($response);
         $summary->attendances = $attendances;
         return $summary;
     }

@@ -8,17 +8,23 @@
 
 namespace Demeyerthom\PeOnline;
 
-
+use Demeyerthom\PeOnline\Interfaces\ParserInterface;
 use Demeyerthom\PeOnline\Models\Accepted;
 use Demeyerthom\PeOnline\Models\Error;
 use Demeyerthom\PeOnline\Models\Results;
 use Demeyerthom\PeOnline\Models\Summary;
-use Illuminate\Support\Collection;
 
-class Parser
+class Parser implements ParserInterface
 {
+    /**
+     * @var ModelFactory
+     */
     protected $factory;
 
+    /**
+     * Parser constructor.
+     * @param ModelFactory|null $factory
+     */
     public function __construct(ModelFactory $factory = null)
     {
         $this->factory = (!empty($factory)) ? $factory : new ModelFactory();
@@ -26,10 +32,10 @@ class Parser
 
     /**
      * @param array $settings
-     * @param Collection $attendances
+     * @param $attendances
      * @return string
      */
-    public function createRequestString(array $settings, Collection $attendances)
+    public function createRequestString(array $settings, $attendances)
     {
         $xml = new \DOMDocument('1.0', 'utf-8');
         $entry = $xml->createElement('Entry');
@@ -54,6 +60,10 @@ class Parser
 
     }
 
+    /**
+     * @param string $summaryString
+     * @return Summary
+     */
     public function parseSummary(string $summaryString): Summary
     {
         $response = simplexml_load_string($summaryString);

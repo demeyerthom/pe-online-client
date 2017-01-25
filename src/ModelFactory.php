@@ -13,6 +13,11 @@ use Illuminate\Support\Collection;
 
 class ModelFactory
 {
+    /**
+     * @param $class
+     * @param array $fields
+     * @return mixed
+     */
     public function create($class, array $fields = [])
     {
         $model = new $class;
@@ -22,6 +27,11 @@ class ModelFactory
         return $model;
     }
 
+    /**
+     * @param $class
+     * @param $instances
+     * @return Collection
+     */
     public function createMultiple($class, $instances): Collection
     {
         $collection = new Collection();
