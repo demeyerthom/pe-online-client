@@ -14,16 +14,16 @@
         <PECourseID>9471</PECourseID>
         <externalPersonID>39054148101</externalPersonID>
         <externalmoduleID>Module_A</externalmoduleID>
-        <endDate>2008-06-09T13:08:13.0000000+02:00</endDate>
+        <endDate>2008-06-09T13:08:13+02:00</endDate>
     </Attendance>
     <Attendance>
         <PECourseID>8001</PECourseID>
         <externalPersonID>39054148101</externalPersonID>
-        <endDate>2008-06-08T13:08:13.0000000+02:00</endDate>
+        <endDate>2008-06-08T13:08:13+02:00</endDate>
     </Attendance>
     <Attendance>
         <PECourseID>8001</PECourseID>
         <externalPersonID>59059671101</externalPersonID>
-        <endDate>2008-06-08T13:08:13.0000000+02:00</endDate>
+        <endDate>2008-06-08T13:08:13+02:00</endDate>
     </Attendance>
 </Entry>

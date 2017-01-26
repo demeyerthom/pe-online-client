@@ -2,20 +2,24 @@
 /**
  * Created by PhpStorm.
  * User: thomas
- * Date: 25-1-17
- * Time: 19:56
+ * Date: 26-1-17
+ * Time: 22:28
  */
 
 namespace Demeyerthom\PeOnline\Tests\Service;
 
 
-use Demeyerthom\PeOnline\Tests\PETestCase;
+use PHPUnit\Framework\TestCase;
 
-class WriteAttendanceTest extends PETestCase
+class WriteAttendanceTest extends TestCase
 {
-    public function testCorrectWriteAttendance(){
-        $client = $this->getClient();
-        $client->writeAttendance();
+    public function testCorrectWriteAttendance()
+    {
+
     }
 
+    public function testCorrectLargeAttendanceBatch()
+    {
+
+    }
 }

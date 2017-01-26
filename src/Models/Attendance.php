@@ -8,7 +8,8 @@
 
 namespace Demeyerthom\PeOnline\Models;
 
-use Demeyerthom\PeOnline\Exceptions\WrongInputException;
+use DateTime;
+use Demeyerthom\PeOnline\Interfaces\AttendanceInterface;
 
 
 /**
@@ -24,24 +25,165 @@ use Demeyerthom\PeOnline\Exceptions\WrongInputException;
  * Class Attendance
  * @package Demeyerthom\PeOnline\Models
  */
-class Attendance extends Model
+class Attendance extends Model implements AttendanceInterface
 {
-    protected $attributes = [
-        'PECourseID' => null,
-        'externalCourseID' => null,
-        'externalPersonID' => null,
-        'PEModuleID' => null,
-        'externalmoduleID' => null,
-        'endDate' => null,
-        'PEEditionID' => null,
-        'externalEditionID' => null,
-        'PEMeetingID' => null,
-        'externalMeetingID' => null,
-    ];
+    protected $PECourseID;
+    protected $externalCourseID;
+    protected $externalPersonID;
+    protected $PEModuleID;
+    protected $externalmoduleID;
+    protected $endDate;
+    protected $PEEditionID;
+    protected $PEMeetingID;
+    protected $externalMeetingID;
 
-    protected $datetime = [
-        'endDate'
-    ];
+    /**
+     * @return mixed
+     */
+    public function getPECourseID()
+    {
+        return $this->PECourseID;
+    }
+
+    /**
+     * @param mixed $PECourseID
+     */
+    public function setPECourseID($PECourseID)
+    {
+        $this->PECourseID = $PECourseID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalCourseID()
+    {
+        return $this->externalCourseID;
+    }
+
+    /**
+     * @param mixed $externalCourseID
+     */
+    public function setExternalCourseID($externalCourseID)
+    {
+        $this->externalCourseID = $externalCourseID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalPersonID()
+    {
+        return $this->externalPersonID;
+    }
+
+    /**
+     * @param mixed $externalPersonID
+     */
+    public function setExternalPersonID($externalPersonID)
+    {
+        $this->externalPersonID = $externalPersonID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPEModuleID()
+    {
+        return $this->PEModuleID;
+    }
+
+    /**
+     * @param mixed $PEModuleID
+     */
+    public function setPEModuleID($PEModuleID)
+    {
+        $this->PEModuleID = $PEModuleID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalmoduleID()
+    {
+        return $this->externalmoduleID;
+    }
+
+    /**
+     * @param mixed $externalmoduleID
+     */
+    public function setExternalmoduleID($externalmoduleID)
+    {
+        $this->externalmoduleID = $externalmoduleID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEndDate(): DateTime
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param mixed $endDate
+     */
+    public function setEndDate($endDate)
+    {
+        if ($endDate instanceof DateTime) {
+            $this->endDate = $endDate;
+            return;
+        }
+        $this->endDate = new DateTime($endDate);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPEEditionID()
+    {
+        return $this->PEEditionID;
+    }
+
+    /**
+     * @param mixed $PEEditionID
+     */
+    public function setPEEditionID($PEEditionID)
+    {
+        $this->PEEditionID = $PEEditionID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPEMeetingID()
+    {
+        return $this->PEMeetingID;
+    }
+
+    /**
+     * @param mixed $PEMeetingID
+     */
+    public function setPEMeetingID($PEMeetingID)
+    {
+        $this->PEMeetingID = $PEMeetingID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExternalMeetingID()
+    {
+        return $this->externalMeetingID;
+    }
+
+    /**
+     * @param mixed $externalMeetingID
+     */
+    public function setExternalMeetingID($externalMeetingID)
+    {
+        $this->externalMeetingID = $externalMeetingID;
+    }
 
 
 }

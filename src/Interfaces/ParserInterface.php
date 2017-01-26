@@ -12,7 +12,7 @@ use Demeyerthom\PeOnline\Models\Summary;
 
 interface ParserInterface
 {
-    public function createRequestString(array $settings, $attendances);
+    public function createRequestString(array $settings, array $attendances);
 
-    public function parseSummary(string $summaryString): Summary;
+    public function parseSummary(string $summaryString, SummaryInterface $summary = null): SummaryInterface;
 }

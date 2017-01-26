@@ -8,28 +8,58 @@
 
 namespace Demeyerthom\PeOnline\Models;
 
+use Demeyerthom\PeOnline\Interfaces\SummaryInterface;
 
-use Illuminate\Support\Collection;
-
-class Summary extends Model
+class Summary extends Model implements SummaryInterface
 {
-    /**
-     * @var Results
-     */
-    protected $attributes = [
-        'results' => null,
-        'errors' => null,
-        'accepted' => null,
-        'attendances' => null,
-        'settings' => null
-    ];
+    protected $errors = [];
+    protected $accepted = [];
 
-    public function __construct()
+    /**
+     * @return mixed
+     */
+    public function getErrors(): array
     {
-        $this->attributes['accepted'] = new Collection();
-        $this->attributes['errors'] = new Collection();
-        $this->attributes['attendances'] = new Collection();
+        return $this->errors;
     }
 
+    /**
+     * @param mixed $errors
+     */
+    public function addError(Error $error)
+    {
+        $this->errors[] = $error;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccepted(): array
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * @param mixed $accepted
+     */
+    public function addAccepted(Accepted $accepted)
+    {
+        $this->accepted[] = $accepted;
+    }
+
+    public function getErrorCount(): int
+    {
+        return count($this->errors);
+    }
+
+    public function getAcceptedCount(): int
+    {
+        return count($this->accepted);
+    }
+
+    public function getTotalCount(): int
+    {
+        return $this->getAcceptedCount() + $this->getErrorCount();
+    }
 
 }

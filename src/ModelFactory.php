@@ -22,7 +22,8 @@ class ModelFactory
     {
         $model = new $class;
         foreach ($fields as $key => $field) {
-            $model->$key = $field;
+            $method = 'set' . str_replace('_', '', ucwords($key, '_'));
+            $model->$method($field);
         }
         return $model;
     }
@@ -32,11 +33,11 @@ class ModelFactory
      * @param $instances
      * @return Collection
      */
-    public function createMultiple($class, $instances): Collection
+    public function createMultiple($class, $instances): array
     {
-        $collection = new Collection();
+        $collection = [];
         foreach ($instances as $fields) {
-            $collection->push($this->create($class, $fields));
+            $collection[] = $this->create($class, $fields);
         }
         return $collection;
     }

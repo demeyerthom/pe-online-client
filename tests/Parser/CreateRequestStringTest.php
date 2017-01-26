@@ -29,7 +29,7 @@ class CreateRequestStringTest extends PETestCase
             'defaultLanguageID' => 1
         ];
 
-        $attendances = new Collection(
+        $attendances =
             $factory->createMultiple(Attendance::class, [
                 [
                     'PECourseID' => 9471,
@@ -47,8 +47,7 @@ class CreateRequestStringTest extends PETestCase
                     'externalPersonID' => 59059671101,
                     'endDate' => '2008-06-08T13:08:13.0000000+02:00'
                 ]
-            ])
-        );
+            ]);
         $xml = $parser->createRequestString($settings, $attendances);
         $this->assertXmlStringEqualsXmlFile(__DIR__ . '/../../resources/entry-example.xml', $xml);
     }

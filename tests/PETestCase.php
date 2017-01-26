@@ -3,6 +3,7 @@
 namespace Demeyerthom\PeOnline\Tests;
 
 use Demeyerthom\PeOnline\Client;
+use Demeyerthom\PeOnline\Interfaces\ClientInterface;
 use Demeyerthom\PeOnline\ModelFactory;
 use Demeyerthom\PeOnline\Parser;
 use PHPUnit\Framework\TestCase;
@@ -20,11 +21,18 @@ class PETestCase extends TestCase
         if (!$mock) {
             return new Client();
         }
-        $client = $this->getMockBuilder(Client::class)->getMock();
-        $client->expects($this->once())
+
+        $entry = new \DOMDocument();
+        $entry->loadXML(file_get_contents(__DIR__ . '/../resources/entry-example.xml'));
+        $entry->normalizeDocument();
+        $xml = preg_replace('~>\s+<~', '><', $entry->saveXML());
+
+        $client = $this->getMockBuilder(Client::class)->setMethods(['postAttendance'])->getMock();
+        $client->expects($this->any())
             ->method('postAttendance')
-            ->with(['xml'])
-            ->willReturn($this->returnValue(file_get_contents(__DIR__ . '/../../resources/response-example.xml')));
+            ->with('<?xml version="1.0" encoding="utf-8"?>
+<Entry><Settings><userID>1</userID><userRole>EDU</userRole><userKey>secret</userKey><orgID>19</orgID><settingOutput>1</settingOutput><emailOutput>test@test.nl</emailOutput><languageID>1</languageID><defaultLanguageID>1</defaultLanguageID></Settings><Attendance><PECourseID>9471</PECourseID><externalPersonID>39054148101</externalPersonID><externalmoduleID>Module_A</externalmoduleID><endDate>2008-06-09T13:08:13+02:00</endDate></Attendance><Attendance><PECourseID>8001</PECourseID><externalPersonID>39054148101</externalPersonID><endDate>2008-06-08T13:08:13+02:00</endDate></Attendance><Attendance><PECourseID>8001</PECourseID><externalPersonID>59059671101</externalPersonID><endDate>2008-06-08T13:08:13+02:00</endDate></Attendance></Entry>')
+            ->willReturn($this->returnValue(file_get_contents(__DIR__ . '/../resources/response-example.xml')));
         return $client;
     }
 

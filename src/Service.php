@@ -9,11 +9,10 @@
 namespace Demeyerthom\PeOnline;
 
 
-use Demeyerthom\PeOnline\Exceptions\AttendanceBatchTooLargeException;
+use Demeyerthom\PeOnline\Exceptions\ChunkSizeTooLargeException;
 use Demeyerthom\PeOnline\Interfaces\ClientInterface;
 use Demeyerthom\PeOnline\Interfaces\ParserInterface;
-use Demeyerthom\PeOnline\Models\Summary;
-use Illuminate\Support\Collection;
+use Demeyerthom\PeOnline\Interfaces\SummaryInterface;
 
 class Service
 {
@@ -21,6 +20,11 @@ class Service
      * @var array
      */
     protected $settings;
+
+    /**
+     * @var
+     */
+    protected $chunk_size;
     /**
      * @var Client|ClientInterface|null
      */
@@ -40,30 +44,54 @@ class Service
      * @param ClientInterface|null $client
      * @param ParserInterface|null $parser
      */
-    public function __construct(array $settings, ClientInterface $client = null, ParserInterface $parser = null)
+    public function __construct(array $settings, $chunk_size = 100, ClientInterface $client = null, ParserInterface $parser = null)
     {
+        if ($chunk_size > 100) {
+            throw new ChunkSizeTooLargeException("The chunksize must be smaller than 100. $chunk_size given");
+        }
+        $this->chunk_size = $chunk_size;
         $this->client = (!empty($client)) ? $client : new Client();
         $this->parser = (!empty($parser)) ? $parser : new Parser();
         $this->settings = $settings;
     }
 
+    public function getSettings()
+    {
+        return $this->settings;
+    }
+
+    public function getChunkSize()
+    {
+        return $this->chunk_size;
+    }
+
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    public function getParser()
+    {
+        return $this->parser;
+    }
+
     /**
      * @param array $attendances
-     * @return Summary
-     * @throws AttendanceBatchTooLargeException
+     * @return SummaryInterface
+     * @throws ChunkSizeTooLargeException
      */
-    public function writeAttendance(array $attendances): Summary
+    public function writeAttendance(array $attendances): SummaryInterface
     {
-        $attendances = new Collection($attendances);
+        $chunks = array_chunk($attendances, 100);
 
-        if ($attendances->count() > 100) {
-            $count = count($attendances);
-            throw new AttendanceBatchTooLargeException("This attendance batch is too large ($count given, max of 100 allowed).");
+        $summary = null;
+
+        foreach ($chunks as $chunk) {
+            $xml = $this->parser->createRequestString($this->settings, $chunk);
+            $response = $this->client->postAttendance($xml);
+            $summary = $this->parser->parseSummary($response, $summary);
         }
-        $xml = $this->parser->createRequestString($this->settings, $attendances);
-        $response = $this->client->postAttendance($xml);
-        $summary = $this->parser->parseSummary($response);
-        $summary->attendances = $attendances;
+
         return $summary;
     }
 

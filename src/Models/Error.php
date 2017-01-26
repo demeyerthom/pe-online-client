@@ -11,9 +11,40 @@ namespace Demeyerthom\PeOnline\Models;
 
 class Error extends Model
 {
-    protected $attributes = [
-        'errorNR' => null,
-        'errorMsg' => null
-    ];
+    protected $errorNR;
+    protected $errorMsg;
+
+    /**
+     * @return mixed
+     */
+    public function getErrorNR()
+    {
+        return $this->errorNR;
+    }
+
+    /**
+     * @param mixed $errorNR
+     */
+    public function setErrorNR($errorNR)
+    {
+        $this->errorNR = $errorNR;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getErrorMsg()
+    {
+        return $this->errorMsg;
+    }
+
+    /**
+     * @param mixed $errorMsg
+     */
+    public function setErrorMsg($errorMsg)
+    {
+        $this->errorMsg = $errorMsg;
+    }
+
 
 }

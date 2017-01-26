@@ -52,6 +52,4 @@ Zie de [organisatie-lijst](documents/org_lijst.pdf) voor de verschillende mogeli
 - Meer tests schrijven
 - Exception toevoegen voor slechte XML-error
 - Het Attendance-object uitbreiden met de mogelijkheid om te valideren op de verschillende wegschrijf-alternatieven.
-- Het verwerken van grotere batches mogelijk maken
 - Extra functies op het Summary-object om filteren en groepen van subselecties mogelijk te maken
-- Service Provider + Facade voor Laravel schrijven
