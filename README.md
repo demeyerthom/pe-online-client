@@ -1,8 +1,8 @@
-#PE-Online Client
+# PE-Online Client #
 
 Deze package is bedoeld om het verwerken van presenties naar PE-Online te vergemakkelijken.
 
-###Configuratie
+### Configuratie ###
 
 ```php
 require 'vendor/autoload.php';
@@ -43,12 +43,12 @@ echo $summary->accepted[0]->date;
 2017-01-21T20:39:13.0000000+02:00
 ```
 
-###Documentatie
+### Documentatie ###
 Zie de [documentatie](documents/PE%20(GAIA)%20-%20Webservice%20e-learning%20en%20Fysiek%20presenties%20-%20AlgemeenV01.doc) van PE voor algemene informatie over de API en de mogelijke settings voor het service-object.
 
 Zie de [organisatie-lijst](documents/org_lijst.pdf) voor de verschillende mogelijke organisaties en hun ids.
 
-###To do
+### To do ###
 - Meer tests schrijven
 - Exception toevoegen voor slechte XML-error
 - Het Attendance-object uitbreiden met de mogelijkheid om te valideren op de verschillende wegschrijf-alternatieven.
